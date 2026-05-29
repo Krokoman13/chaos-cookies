@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using UnityEngine;
 
 public class HexagonTilemap : MonoBehaviour
@@ -10,6 +11,7 @@ public class HexagonTilemap : MonoBehaviour
     [SerializeField] int maxY = 108;
 
     public bool[,] currentHexMap = null;
+    public event Action<bool[,]> OnMapChanged;
 
     public void Generate()
     {
@@ -29,7 +31,7 @@ public class HexagonTilemap : MonoBehaviour
         {
             for (uint j = 0; j < maxY; j++)
             {
-                currentHexMap[i, j] = Random.value > 0.90f;
+                currentHexMap[i, j] = UnityEngine.Random.value > 0.90f;
             }
         }
 
@@ -43,6 +45,9 @@ public class HexagonTilemap : MonoBehaviour
 
             }
         }
+
+        //Notify other scripts that the map got updated
+        OnMapChanged?.Invoke(currentHexMap);
     }
 
     Vector2 calculateHexPosition(uint x, uint y)
