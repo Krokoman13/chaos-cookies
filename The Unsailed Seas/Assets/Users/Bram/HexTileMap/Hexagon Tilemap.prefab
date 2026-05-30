@@ -1,0 +1,278 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8785329342156854977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 112215107437493464}
+  - component: {fileID: 1612773177533678075}
+  m_Layer: 0
+  m_Name: Hexagon Tilemap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &112215107437493464
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8785329342156854977}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1612773177533678075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8785329342156854977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7605764570694674eb311e1eb2ea8505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxX: 133
+  maxY: 153
+  terraformRules:
+  - mode: 0
+    chance: 0.0015
+    minConnected: 0
+  - mode: 0
+    chance: 1
+    minConnected: 1
+  - mode: 0
+    chance: 1
+    minConnected: 1
+  - mode: 0
+    chance: 1
+    minConnected: 1
+  - mode: 0
+    chance: 1
+    minConnected: 1
+  - mode: 0
+    chance: 1
+    minConnected: 1
+  - mode: 1
+    chance: 0.9
+    minConnected: 0
+  - mode: 0
+    chance: 0.003
+    minConnected: 0
+  - mode: 0
+    chance: 0.9
+    minConnected: 1
+  - mode: 0
+    chance: 0.15
+    minConnected: 1
+  - mode: 0
+    chance: 0.003
+    minConnected: 0
+  - mode: 0
+    chance: 0.15
+    minConnected: 1
+  beachTiles:
+  - prefab: {fileID: 6104911278537769561, guid: 0392c060ab8219a40938f9c5a51ddd58, type: 3}
+    connections: 000000000000
+    yRotation: 0
+  - prefab: {fileID: 2246183078563494865, guid: 4dc17e1caad250e46b9cbad8b97b750a, type: 3}
+    connections: 010000000000
+    yRotation: 0
+  - prefab: {fileID: 7300296512426462606, guid: 0099f3eaf8fcca54285b4317814d9940, type: 3}
+    connections: 010000010000
+    yRotation: 0
+  - prefab: {fileID: 3451718912326449096, guid: 53ef7f2629e1dc94da6b12a5ac194ddd, type: 3}
+    connections: 010001000000
+    yRotation: 0
+  - prefab: {fileID: 8438522396000417458, guid: 66afee0c6b9e4724b9cb86744044e2e5, type: 3}
+    connections: 010001000100
+    yRotation: 0
+  - prefab: {fileID: 8561589666061531566, guid: 92b95f5217b52c2449aa5e729f79a6e4, type: 3}
+    connections: 010100000000
+    yRotation: 0
+  - prefab: {fileID: 4549119359469354611, guid: 7b87c822dd54ba34b97b82e1a8ab3864, type: 3}
+    connections: 010100000100
+    yRotation: 0
+  - prefab: {fileID: 2385995075601647485, guid: e33894076b3cf184bac023f2f9dfabb4, type: 3}
+    connections: 010100010100
+    yRotation: 0
+  - prefab: {fileID: 28944353212944902, guid: 162645eb99966a24b8d388661abf1d7c, type: 3}
+    connections: 010101000000
+    yRotation: 0
+  - prefab: {fileID: 9064600261715564572, guid: d0a3a0b9e09244648a2b182ef1f31360, type: 3}
+    connections: 010101000100
+    yRotation: 0
+  - prefab: {fileID: 3337508692622168512, guid: d5f5677da9d22dd49bccc209277ada7c, type: 3}
+    connections: 010101010000
+    yRotation: 0
+  - prefab: {fileID: 3894339146896501793, guid: 6807a0f44afebb3459c7bc4556457355, type: 3}
+    connections: 010101010100
+    yRotation: 0
+  - prefab: {fileID: 6840837274890851982, guid: e3576a6c2a9d1994190f24e93590fdcf, type: 3}
+    connections: 010101010101
+    yRotation: 0
+  - prefab: {fileID: 8794624133247613842, guid: 5a9d038428483404f9ee460560535ffc, type: 3}
+    connections: 010100010000
+    yRotation: 0
+  - prefab: {fileID: 2246183078563494865, guid: 4dc17e1caad250e46b9cbad8b97b750a, type: 3}
+    connections: 000100000000
+    yRotation: 1
+  - prefab: {fileID: 2246183078563494865, guid: 4dc17e1caad250e46b9cbad8b97b750a, type: 3}
+    connections: 000001000000
+    yRotation: 2
+  - prefab: {fileID: 2246183078563494865, guid: 4dc17e1caad250e46b9cbad8b97b750a, type: 3}
+    connections: 000000010000
+    yRotation: 3
+  - prefab: {fileID: 2246183078563494865, guid: 4dc17e1caad250e46b9cbad8b97b750a, type: 3}
+    connections: 000000000100
+    yRotation: 4
+  - prefab: {fileID: 2246183078563494865, guid: 4dc17e1caad250e46b9cbad8b97b750a, type: 3}
+    connections: 000000000001
+    yRotation: 5
+  - prefab: {fileID: 7300296512426462606, guid: 0099f3eaf8fcca54285b4317814d9940, type: 3}
+    connections: 000100000100
+    yRotation: 1
+  - prefab: {fileID: 7300296512426462606, guid: 0099f3eaf8fcca54285b4317814d9940, type: 3}
+    connections: 000001000001
+    yRotation: 2
+  - prefab: {fileID: 3451718912326449096, guid: 53ef7f2629e1dc94da6b12a5ac194ddd, type: 3}
+    connections: 000100010000
+    yRotation: 1
+  - prefab: {fileID: 3451718912326449096, guid: 53ef7f2629e1dc94da6b12a5ac194ddd, type: 3}
+    connections: 000001000100
+    yRotation: 2
+  - prefab: {fileID: 3451718912326449096, guid: 53ef7f2629e1dc94da6b12a5ac194ddd, type: 3}
+    connections: 000000010001
+    yRotation: 3
+  - prefab: {fileID: 3451718912326449096, guid: 53ef7f2629e1dc94da6b12a5ac194ddd, type: 3}
+    connections: 010000000100
+    yRotation: 4
+  - prefab: {fileID: 3451718912326449096, guid: 53ef7f2629e1dc94da6b12a5ac194ddd, type: 3}
+    connections: 000100000001
+    yRotation: 5
+  - prefab: {fileID: 8438522396000417458, guid: 66afee0c6b9e4724b9cb86744044e2e5, type: 3}
+    connections: 000100010001
+    yRotation: 1
+  - prefab: {fileID: 8561589666061531566, guid: 92b95f5217b52c2449aa5e729f79a6e4, type: 3}
+    connections: 000101000000
+    yRotation: 1
+  - prefab: {fileID: 8561589666061531566, guid: 92b95f5217b52c2449aa5e729f79a6e4, type: 3}
+    connections: 000001010000
+    yRotation: 2
+  - prefab: {fileID: 8561589666061531566, guid: 92b95f5217b52c2449aa5e729f79a6e4, type: 3}
+    connections: 000000010100
+    yRotation: 3
+  - prefab: {fileID: 8561589666061531566, guid: 92b95f5217b52c2449aa5e729f79a6e4, type: 3}
+    connections: 000000000101
+    yRotation: 4
+  - prefab: {fileID: 8561589666061531566, guid: 92b95f5217b52c2449aa5e729f79a6e4, type: 3}
+    connections: 010000000001
+    yRotation: 5
+  - prefab: {fileID: 4549119359469354611, guid: 7b87c822dd54ba34b97b82e1a8ab3864, type: 3}
+    connections: 000101000001
+    yRotation: 1
+  - prefab: {fileID: 4549119359469354611, guid: 7b87c822dd54ba34b97b82e1a8ab3864, type: 3}
+    connections: 010001010000
+    yRotation: 2
+  - prefab: {fileID: 4549119359469354611, guid: 7b87c822dd54ba34b97b82e1a8ab3864, type: 3}
+    connections: 000100010100
+    yRotation: 3
+  - prefab: {fileID: 4549119359469354611, guid: 7b87c822dd54ba34b97b82e1a8ab3864, type: 3}
+    connections: 000001000101
+    yRotation: 4
+  - prefab: {fileID: 4549119359469354611, guid: 7b87c822dd54ba34b97b82e1a8ab3864, type: 3}
+    connections: 010000010001
+    yRotation: 5
+  - prefab: {fileID: 2385995075601647485, guid: e33894076b3cf184bac023f2f9dfabb4, type: 3}
+    connections: 000101000101
+    yRotation: 1
+  - prefab: {fileID: 2385995075601647485, guid: e33894076b3cf184bac023f2f9dfabb4, type: 3}
+    connections: 010001010001
+    yRotation: 2
+  - prefab: {fileID: 28944353212944902, guid: 162645eb99966a24b8d388661abf1d7c, type: 3}
+    connections: 000101010000
+    yRotation: 1
+  - prefab: {fileID: 28944353212944902, guid: 162645eb99966a24b8d388661abf1d7c, type: 3}
+    connections: 000001010100
+    yRotation: 2
+  - prefab: {fileID: 28944353212944902, guid: 162645eb99966a24b8d388661abf1d7c, type: 3}
+    connections: 000000010101
+    yRotation: 3
+  - prefab: {fileID: 28944353212944902, guid: 162645eb99966a24b8d388661abf1d7c, type: 3}
+    connections: 010000000101
+    yRotation: 4
+  - prefab: {fileID: 28944353212944902, guid: 162645eb99966a24b8d388661abf1d7c, type: 3}
+    connections: 010100000001
+    yRotation: 5
+  - prefab: {fileID: 9064600261715564572, guid: d0a3a0b9e09244648a2b182ef1f31360, type: 3}
+    connections: 000101010001
+    yRotation: 1
+  - prefab: {fileID: 9064600261715564572, guid: d0a3a0b9e09244648a2b182ef1f31360, type: 3}
+    connections: 010001010100
+    yRotation: 2
+  - prefab: {fileID: 9064600261715564572, guid: d0a3a0b9e09244648a2b182ef1f31360, type: 3}
+    connections: 000100010101
+    yRotation: 3
+  - prefab: {fileID: 9064600261715564572, guid: d0a3a0b9e09244648a2b182ef1f31360, type: 3}
+    connections: 010001000101
+    yRotation: 4
+  - prefab: {fileID: 9064600261715564572, guid: d0a3a0b9e09244648a2b182ef1f31360, type: 3}
+    connections: 010100010001
+    yRotation: 5
+  - prefab: {fileID: 3337508692622168512, guid: d5f5677da9d22dd49bccc209277ada7c, type: 3}
+    connections: 000101010100
+    yRotation: 1
+  - prefab: {fileID: 3337508692622168512, guid: d5f5677da9d22dd49bccc209277ada7c, type: 3}
+    connections: 000001010101
+    yRotation: 2
+  - prefab: {fileID: 3337508692622168512, guid: d5f5677da9d22dd49bccc209277ada7c, type: 3}
+    connections: 010000010101
+    yRotation: 3
+  - prefab: {fileID: 3337508692622168512, guid: d5f5677da9d22dd49bccc209277ada7c, type: 3}
+    connections: 010100000101
+    yRotation: 4
+  - prefab: {fileID: 3337508692622168512, guid: d5f5677da9d22dd49bccc209277ada7c, type: 3}
+    connections: 010101000001
+    yRotation: 5
+  - prefab: {fileID: 3894339146896501793, guid: 6807a0f44afebb3459c7bc4556457355, type: 3}
+    connections: 000101010101
+    yRotation: 1
+  - prefab: {fileID: 3894339146896501793, guid: 6807a0f44afebb3459c7bc4556457355, type: 3}
+    connections: 010001010101
+    yRotation: 2
+  - prefab: {fileID: 3894339146896501793, guid: 6807a0f44afebb3459c7bc4556457355, type: 3}
+    connections: 010100010101
+    yRotation: 3
+  - prefab: {fileID: 3894339146896501793, guid: 6807a0f44afebb3459c7bc4556457355, type: 3}
+    connections: 010101000101
+    yRotation: 4
+  - prefab: {fileID: 3894339146896501793, guid: 6807a0f44afebb3459c7bc4556457355, type: 3}
+    connections: 010101010001
+    yRotation: 5
+  - prefab: {fileID: 8794624133247613842, guid: 5a9d038428483404f9ee460560535ffc, type: 3}
+    connections: 000101000100
+    yRotation: 1
+  - prefab: {fileID: 8794624133247613842, guid: 5a9d038428483404f9ee460560535ffc, type: 3}
+    connections: 000001010001
+    yRotation: 2
+  - prefab: {fileID: 8794624133247613842, guid: 5a9d038428483404f9ee460560535ffc, type: 3}
+    connections: 010000010100
+    yRotation: 3
+  - prefab: {fileID: 8794624133247613842, guid: 5a9d038428483404f9ee460560535ffc, type: 3}
+    connections: 000100000101
+    yRotation: 4
+  - prefab: {fileID: 8794624133247613842, guid: 5a9d038428483404f9ee460560535ffc, type: 3}
+    connections: 010001000001
+    yRotation: 5
