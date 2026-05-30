@@ -13,6 +13,7 @@ public class HexagonTilemap : MonoBehaviour
     [SerializeField] int maxY = 108;
 
     public bool[,] currentHexMap = null;
+    public event Action<bool[,]> OnMapChanged;
 
     [Serializable] enum Mode { SpawnBeach = 0, RemoveBeach = 1}
     [Serializable] struct TerraformRule
@@ -80,6 +81,9 @@ public class HexagonTilemap : MonoBehaviour
 
             }
         }
+
+        //Notify other scripts that the map got updated
+        OnMapChanged?.Invoke(currentHexMap);
     }
 
     List<bool> ConnectedHexTiles(uint x, uint y, bool[,] hexMap)
