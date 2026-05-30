@@ -27,7 +27,7 @@ public class HexMapCanvasGraphic : MaskableGraphic
 
     [Header("Waves")]
     public Color WavesColor = new Color(1f, 1f, 1f, 0.35f);
-    public int WavesCount = 4;
+    public int WavesCount = 3;
     public float WavesSpacing = 7f;
     public float WavesWidth = 1.4f;
     public float WavesWidthNoise = 0.6f;
@@ -35,8 +35,12 @@ public class HexMapCanvasGraphic : MaskableGraphic
 
     [Header("Simplification")]
     public int MinIslandSize = 4;
-    public int SmoothingIterations = 2;
+    public int SmoothingIterations = 1;
 
+    [Header("Chunking")]
+    public int ChunkIndex = 0;
+    public int ChunkCount = 1;
+    public bool DrawBackgroundInThisChunk = true;
 
     [SerializeField] HexagonTilemap source;
 
@@ -86,8 +90,8 @@ public class HexMapCanvasGraphic : MaskableGraphic
     {
         vh.Clear();
 
-        UIMeshPainter.DrawBackground(vh, rectTransform.rect, SeaColor);
-
+        if (DrawBackgroundInThisChunk)
+            UIMeshPainter.DrawBackground(vh, rectTransform.rect, SeaColor);
 
         if (map == null)
             return;
@@ -101,20 +105,24 @@ public class HexMapCanvasGraphic : MaskableGraphic
         Vector2 offset = -mapSize * 0.5f;
 
         List<List<Vector2Int>> islands = HexRegionFinder.FindConnectedComponents(map);
-        foreach (List<Vector2Int> island in islands)
+        for (int islandIndex = 0; islandIndex < islands.Count; islandIndex++)
         {
-             List<Vector2> outline = HexIslandOutlineBuilder.BuildOutline(
-                 island,
-                 offset,
-                 HexSize
-             );
-            // We draw water lines even if islands are too small so we can still see a glimpse of those 
-            UIMeshPainter.DrawWaterLines(vh, outline, WavesColor, WavesCount, WavesSpacing, WavesWidth, WavesWidthNoise, WavesNoiseFrequency);
+            if (ChunkCount > 1 && islandIndex % ChunkCount != ChunkIndex)
+                continue;
+
+            List<Vector2Int> island = islands[islandIndex];
 
             if (island.Count < MinIslandSize)
                 continue;
 
- 
+            List<Vector2> outline = HexIslandOutlineBuilder.BuildOutline(
+                island,
+                offset,
+                HexSize
+            );
+            // We draw water lines even if islands are too small so we can still see a glimpse of those 
+            UIMeshPainter.DrawWaterLines(vh, outline, WavesColor, WavesCount, WavesSpacing, WavesWidth, WavesWidthNoise, WavesNoiseFrequency);
+
 
             if (outline.Count < 3)
                 continue;
@@ -150,5 +158,10 @@ public class HexMapCanvasGraphic : MaskableGraphic
                 );
             }
         }
+
+#if UNITY_EDITOR
+        if (vh.currentVertCount > 60000)
+            Debug.LogWarning($"{name} generated {vh.currentVertCount} UI vertices. Split into more chunks.");
+#endif
     }
 }

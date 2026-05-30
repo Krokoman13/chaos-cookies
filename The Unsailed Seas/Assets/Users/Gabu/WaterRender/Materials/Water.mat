@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6548770848074318819
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Water
+  m_Shader: {fileID: 4800000, guid: a33895607a8af884e8c5d6c2a4f8321a, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: _FoamColor _WaveDirection2
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _ShoreMaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaDeep: 1
+    - _AlphaShallow: 0.042
+    - _DepthMaxDistance: 0.29
+    - _FoamAmount: 1
+    - _FoamBreakup: 0
+    - _FoamCrestStrength: 0
+    - _FoamDetailScale: -4.26
+    - _FoamEvolutionSpeed: 0.2
+    - _FoamLineDensity: 1.44
+    - _FoamLineWidth: 0.005
+    - _FoamOpacity: 1
+    - _FoamScale: 3.5
+    - _FoamSharpness: 0.28
+    - _FoamSize: 1.85
+    - _FoamSoftness: 0.061
+    - _FoamSpeed: 1.09
+    - _FoamUnderLineWidthMultiplier: 1.29
+    - _FoamUnderOffset: 0
+    - _FoamUnderOpacity: 0.877
+    - _FoamUnderSizeMultiplier: 1
+    - _FoamUnderSoftnessMultiplier: 6.01
+    - _FoamVoronoiWarp: 0.35
+    - _ShoreFoamStrength: 0.8
+    - _ShoreNoiseAmount: 1.5
+    - _ShoreNoiseScale: 0.08
+    - _ShoreWaveFrequency: 18
+    - _ShoreWaveSharpness: 0.65
+    - _ShoreWaveSpeed: 1.2
+    - _SurfaceLight: 0
+    - _WaterLevel: 0
+    - _Wave1Weight: 0.49
+    - _Wave2FrequencyMultiplier: 13.7
+    - _Wave2PhaseOffset: 5.75
+    - _Wave2SpeedMultiplier: 2.18
+    - _Wave2Weight: 0.33
+    - _WaveAmplitude: 0.3
+    - _WaveFrequency: 0.1
+    - _WaveSpeed: 0.42
+    m_Colors:
+    - _DeepColor: {r: 0, g: 0.57291293, b: 1, a: 1}
+    - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FoamUnderColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ShallowColor: {r: 0.24999997, g: 0.85, b: 0.9, a: 1}
+    - _ShoreMapOrigin: {r: -252.5, g: -216.50635, b: 0, a: 0}
+    - _ShoreMapSize: {r: 505, g: 433.0127, b: 0, a: 0}
+    - _WaveDirection1: {r: 1, g: 0.25, b: 0, a: 0}
+    - _WaveDirection2: {r: -0.4, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

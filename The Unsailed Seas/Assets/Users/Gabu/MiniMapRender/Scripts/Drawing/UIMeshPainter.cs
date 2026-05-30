@@ -189,7 +189,7 @@ public static class UIMeshPainter
             return;
 
         List<Vector2> cleanPoints = RemoveBadPoints(islandPoints, 0.05f);
-        cleanPoints = SmoothClosedLoop(cleanPoints, 3);
+        cleanPoints = SmoothClosedLoop(cleanPoints, 1);
 
         for (int i = 0; i < lineCount; i++)
         {
