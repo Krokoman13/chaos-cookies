@@ -9,9 +9,31 @@ public class GameManager : MonoBehaviour
     [SerializeField] HexagonTilemap hexagonTilemap;
     [SerializeField] Transform boat;
 
+    [SerializeField] GameObject finalChestPrefab;
+
+    [SerializeField] UnityEvent onLaunch;
     [SerializeField] UnityEvent onRestart;
 
+
+    public static GameManager instance;
+
+    public void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogError("Duplicate GameManager Found!");
+        }
+
+        instance = this;
+    }
+
     public void Restart()
+    {
+        Setup();
+        onRestart?.Invoke();
+    }
+
+    public void Setup()
     {
         hexagonTilemap.Generate();
         
@@ -41,18 +63,29 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        Vector2Int randomSpot = possibleSpawnLocations[(int)(possibleSpawnLocations.Count * Random.value)];
+        {
+            Vector2Int randomSpot = possibleSpawnLocations[(int)(possibleSpawnLocations.Count * Random.value)];
 
-        Vector2 randomPosition = HexagonTilemap.CalculateHexPosition((uint)randomSpot.x, (uint)randomSpot.y);
+            Vector2 randomPosition = HexagonTilemap.CalculateHexPosition((uint)randomSpot.x, (uint)randomSpot.y);
 
-        boat.position = new Vector3(randomPosition.x, boat.position.y, randomPosition.y);
-        boat.rotation = Quaternion.Euler(0, WindManager.instance.windAngle_degrees + 90, 0);
+            boat.position = new Vector3(randomPosition.x, boat.position.y, randomPosition.y);
+            boat.rotation = Quaternion.Euler(0, WindManager.instance.windAngle_degrees + 90, 0);
+        }
 
-       onRestart?.Invoke();
+        {
+            Vector2Int randomSpot = possibleTreasureLocations[(int)(possibleTreasureLocations.Count * Random.value)];
+
+            Vector2 randomPosition = HexagonTilemap.CalculateHexPosition((uint)randomSpot.x, (uint)randomSpot.y);
+
+            GameObject chest = GameObject.Instantiate(finalChestPrefab);
+            chest.transform.position = new Vector3(randomPosition.x, boat.position.y, randomPosition.y);
+        }
+
+        onLaunch?.Invoke();
     }
 
     private void Start()
     {
-        Restart();
+        Setup();
     }
 }

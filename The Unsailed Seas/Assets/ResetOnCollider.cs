@@ -11,7 +11,8 @@ public class ResetOnCollider : MonoBehaviour
 
         if (tag != other.tag) return;
 
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(currentSceneName);
+        GameManager.instance.Restart();
+
+        GameObject.Destroy(gameObject);
     }
 }

@@ -109,14 +109,23 @@ public class HexagonTilemap : MonoBehaviour
     {
         RotateBeachTiles();
 
-        while (transform.childCount > 0)
+        List<Transform> toDestroy = new List<Transform>();
+
+        foreach (Transform child in transform)
+        { 
+            toDestroy.Add(child);    
+        }
+
+        foreach (Transform child in toDestroy)
         {
-            Transform child = transform.GetChild(0);
-#if UNITY_EDITOR
-            DestroyImmediate(child.gameObject);
-#else
-            Destroy(child.gameObject);
-#endif
+            if (Application.isPlaying)
+            {
+                Destroy(child.gameObject);
+            }
+            else
+            {
+                DestroyImmediate(child.gameObject);
+            }
         }
 
         currentHexMap = new bool[maxX, maxY];
