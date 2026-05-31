@@ -151388,9 +151388,6 @@ MonoBehaviour:
   sailNormalAngle: 0
   sailNormalMinAngle: -75
   sailNormalMaxAngle: 75
-  sailPower: 0.05
-  keelEfficiency: 0.9
-  waterDrag: 0.1
 --- !u!1 &697441567
 GameObject:
   m_ObjectHideFlags: 0

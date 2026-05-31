@@ -20,6 +20,11 @@ public class BoatController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    Vector2 Project(Vector2 a, Vector2 b)
+    {
+        return Vector2.Dot(a, b) / Vector2.Dot(b, b) * b;
+    }
+
     private void FixedUpdate()
     {
         if (rb == null)
@@ -62,15 +67,16 @@ public class BoatController : MonoBehaviour
             Mathf.Cos(WindManager.instance.windAngle_degrees * Mathf.Deg2Rad)
         ) * WindManager.instance.windSpeed;
 
-        float windOnSail = Vector2.Dot(
-            windForce.normalized,
-            sailNormal
-        );
+        Vector2 reflectedForce = Vector2.Reflect(windForce.normalized, sailNormal);
 
-        Vector2 sailForce = sailNormal * windOnSail * WindManager.instance.windSpeed;
+        reflectedForce *= Mathf.Abs(Vector2.Dot(reflectedForce, sailNormal)) * WindManager.instance.windSpeed;
+
+        Vector2 forceOnBoat = -reflectedForce;
+
+        Vector2 finalForce = Project(forceOnBoat, shipForward);
 
         rb.AddForce(
-            new Vector3(sailForce.x, 0, sailForce.y)
+            new Vector3(finalForce.x, 0, finalForce.y)
         );
     }
 
