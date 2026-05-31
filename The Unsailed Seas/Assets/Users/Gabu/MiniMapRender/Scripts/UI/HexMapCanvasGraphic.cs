@@ -119,7 +119,7 @@ public class HexMapCanvasGraphic : MaskableGraphic
 
         if (DrawBackgroundInThisChunk)
         {
-            Rect r = rectTransform.rect;
+            Rect r = rectTransform.rect;    
             float halfW = Mathf.Max(r.width, mapSize.x) * 0.5f;
             float halfH = Mathf.Max(r.height, mapSize.y) * 0.5f;
             Rect bgRect = new Rect(-halfW, -halfH, halfW * 2f, halfH * 2f);
@@ -129,6 +129,7 @@ public class HexMapCanvasGraphic : MaskableGraphic
         Vector2 offset = -mapSize * 0.5f;
 
         List<List<Vector2Int>> islands = HexRegionFinder.FindConnectedComponents(map);
+        int skippedSize = 0, skippedOutline = 0;
         for (int islandIndex = 0; islandIndex < islands.Count; islandIndex++)
         {
             if (ChunkCount > 1 && islandIndex % ChunkCount != ChunkIndex)
@@ -137,19 +138,23 @@ public class HexMapCanvasGraphic : MaskableGraphic
             List<Vector2Int> island = islands[islandIndex];
 
             if (island.Count < MinIslandSize)
+            {
+                skippedSize++;
                 continue;
+            }
 
             List<Vector2> outline = HexIslandOutlineBuilder.BuildOutline(
                 island,
                 offset,
                 HexSize
             );
-            // We draw water lines even if islands are too small so we can still see a glimpse of those 
             UIMeshPainter.DrawWaterLines(vh, outline, WavesColor, WavesCount, WavesSpacing, WavesWidth, WavesWidthNoise, WavesNoiseFrequency);
 
-
             if (outline.Count < 3)
+            {
+                skippedOutline++;
                 continue;
+            }
 
             outline = PolylineSmoother.SmoothClosedLoop(
                 outline,
@@ -182,6 +187,9 @@ public class HexMapCanvasGraphic : MaskableGraphic
                 );
             }
         }
+
+        if (skippedSize > 0 || skippedOutline > 0)
+            Debug.Log($"[MiniMap] {name}: {islands.Count} islands total, skipped {skippedSize} (too small < {MinIslandSize}), {skippedOutline} (outline failed)");
 
 #if UNITY_EDITOR
         if (vh.currentVertCount > 60000)
