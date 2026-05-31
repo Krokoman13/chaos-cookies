@@ -39,32 +39,32 @@ Material:
     m_TexEnvs:
     - _ShoreMaskTex:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: -6.61, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _AlphaDeep: 1
     - _AlphaShallow: 1
     - _DepthMaxDistance: 0.01
-    - _FoamAmount: 1
-    - _FoamBreakup: 0
-    - _FoamCrestStrength: 0
-    - _FoamDetailScale: -4.26
-    - _FoamEvolutionSpeed: 0.08
-    - _FoamLineDensity: 1.44
-    - _FoamLineWidth: 0
-    - _FoamOpacity: 0.565
+    - _FoamAmount: 0.55
+    - _FoamBreakup: 0.45
+    - _FoamCrestStrength: 0.08
+    - _FoamDetailScale: 5
+    - _FoamEvolutionSpeed: 1
+    - _FoamLineDensity: 7
+    - _FoamLineWidth: 0.16
+    - _FoamOpacity: 0.22
     - _FoamScale: 3.5
     - _FoamSharpness: 0.28
-    - _FoamSize: 1.85
-    - _FoamSoftness: 0.061
-    - _FoamSpeed: 0.05
-    - _FoamUnderLineWidthMultiplier: 1.29
-    - _FoamUnderOffset: 0
-    - _FoamUnderOpacity: 0.669
+    - _FoamSize: 4
+    - _FoamSoftness: 0.08
+    - _FoamSpeed: 0.08
+    - _FoamUnderLineWidthMultiplier: 1
+    - _FoamUnderOffset: 0.17
+    - _FoamUnderOpacity: 0.18
     - _FoamUnderSizeMultiplier: 1
-    - _FoamUnderSoftnessMultiplier: 3.49
-    - _FoamVoronoiWarp: 0.35
+    - _FoamUnderSoftnessMultiplier: 1
+    - _FoamVoronoiWarp: 0.3
     - _ShoreFoamStrength: 0.8
     - _ShoreNoiseAmount: 1.5
     - _ShoreNoiseScale: 0.08
@@ -74,17 +74,17 @@ Material:
     - _SurfaceLight: 0
     - _WaterLevel: 0
     - _Wave1Weight: 0.49
-    - _Wave2FrequencyMultiplier: 13.7
+    - _Wave2FrequencyMultiplier: 2.39
     - _Wave2PhaseOffset: 5.75
     - _Wave2SpeedMultiplier: 2.18
     - _Wave2Weight: 0.33
-    - _WaveAmplitude: 0
-    - _WaveFrequency: 0.1
-    - _WaveSpeed: 0.42
+    - _WaveAmplitude: 0.12
+    - _WaveFrequency: 2.19
+    - _WaveSpeed: 0.8
     m_Colors:
     - _DeepColor: {r: 0, g: 0.57291293, b: 1, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
-    - _FoamUnderColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FoamUnderColor: {r: 0.03, g: 0.32, b: 0.42, a: 1}
     - _ShallowColor: {r: 0.24999997, g: 0.85, b: 0.9, a: 1}
     - _ShoreMapOrigin: {r: -252.5, g: -216.50635, b: 0, a: 0}
     - _ShoreMapSize: {r: 505, g: 433.0127, b: 0, a: 0}
