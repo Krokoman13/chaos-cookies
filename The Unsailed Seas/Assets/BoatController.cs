@@ -1,76 +1,123 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BoatController : MonoBehaviour
 {
-    Rigidbody rb;
+    private Rigidbody rb;
+
+    [SerializeField] private float turnSpeed = 50f;
+    [SerializeField] private float sailTurnSpeed = 50f;
+
+    [SerializeField] private Transform flagTransform;
+    [SerializeField] private List<Transform> sails;
+
+    [SerializeField] private float sailNormalAngle = 0f;
+    [SerializeField] private float sailNormalMinAngle = -85f;
+    [SerializeField] private float sailNormalMaxAngle = 85f;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    [SerializeField] float forwardVelocity = 0.1f;
-    [SerializeField] float turnSpeed = 0.1f;
-
-    // Update is called once per frame
-    void FixedUpdate()
+    Vector2 Project(Vector2 a, Vector2 b)
     {
-        if (rb == null) return;
+        return Vector2.Dot(a, b) / Vector2.Dot(b, b) * b;
+    }
 
-        Vector3 camera_t_boat = transform.position - Camera.main.transform.position;
+    private void FixedUpdate()
+    {
+        if (rb == null)
+            return;
 
-
-        Vector3 forwardVector = camera_t_boat;
-        forwardVector.y = 0;
-        forwardVector = forwardVector.normalized;
-
-        Vector3 backwardVector = -forwardVector;
-        Vector3 rightVector = Quaternion.AngleAxis(90, Vector3.up) * forwardVector;
-        Vector3 leftVector = -rightVector;
-
-        Vector3 directionVector = Vector3.zero;
-
-        if (Input.GetKey(KeyCode.S))
+        // Ship steering
+        if (Input.GetKey(KeyCode.A) != Input.GetKey(KeyCode.D))
         {
-            directionVector += backwardVector;
+            Vector3 targetRotation = transform.rotation.eulerAngles;
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                targetRotation.y -= turnSpeed * Time.fixedDeltaTime;
+            }
+            else
+            {
+                targetRotation.y += turnSpeed * Time.fixedDeltaTime;
+            }
+
+            rb.MoveRotation(Quaternion.Euler(targetRotation));
         }
 
-        if (Input.GetKey(KeyCode.W))
+        // Ship forward direction
+        Vector2 shipForward = new Vector2(
+            transform.forward.x,
+            transform.forward.z
+        ).normalized;
+
+        // Sail normal in world space
+        float sailWorldAngle = transform.eulerAngles.y + sailNormalAngle;
+
+        Vector2 sailNormal = new Vector2(
+            Mathf.Sin(sailWorldAngle * Mathf.Deg2Rad),
+            Mathf.Cos(sailWorldAngle * Mathf.Deg2Rad)
+        ).normalized;
+
+        // Wind vector
+        Vector2 windForce = new Vector2(
+            Mathf.Sin(WindManager.instance.windAngle_degrees * Mathf.Deg2Rad),
+            Mathf.Cos(WindManager.instance.windAngle_degrees * Mathf.Deg2Rad)
+        ) * WindManager.instance.windSpeed;
+
+        Vector2 reflectedForce = Vector2.Reflect(windForce.normalized, sailNormal);
+
+        reflectedForce *= Mathf.Abs(Vector2.Dot(reflectedForce, sailNormal)) * WindManager.instance.windSpeed;
+
+        Vector2 forceOnBoat = -reflectedForce;
+
+        Vector2 finalForce = Project(forceOnBoat, shipForward);
+
+        rb.AddForce(
+            new Vector3(finalForce.x, 0, finalForce.y)
+        );
+    }
+
+    private void Update()
+    {
+        // Flag points with the wind
+        if (flagTransform)
         {
-            directionVector += forwardVector;
+            flagTransform.rotation = Quaternion.Euler(
+                0f,
+                WindManager.instance.windAngle_degrees + 90.0f,
+                0f
+            );
         }
 
-        if (Input.GetKey(KeyCode.A))
+        // Sail controls
+        if (Input.GetKey(KeyCode.LeftArrow) != Input.GetKey(KeyCode.RightArrow))
         {
-            directionVector += leftVector;
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                sailNormalAngle -= sailTurnSpeed * Time.deltaTime;
+            }
+            else
+            {
+                sailNormalAngle += sailTurnSpeed * Time.deltaTime;
+            }
         }
 
-        if (Input.GetKey(KeyCode.D))
+        sailNormalAngle = Mathf.Clamp(
+            sailNormalAngle,
+            sailNormalMinAngle,
+            sailNormalMaxAngle
+        );
+
+        // Visual sail rotation
+        foreach (Transform sail in sails)
         {
-            directionVector += rightVector;
-        }
-
-        if (directionVector.sqrMagnitude > 0.1)
-        {
-            directionVector = directionVector.normalized * forwardVelocity;
-
-            rb.AddForce(directionVector);
-        }
-
-        Vector3 velocity = rb.linearVelocity;
-        velocity.y = 0;
-
-        if (velocity.sqrMagnitude > 0.1f)
-        {
-            Quaternion targetRotation =
-                Quaternion.LookRotation(velocity.normalized);
-
-            rb.MoveRotation(
-                Quaternion.RotateTowards(
-                    rb.rotation,
-                    targetRotation,
-                    turnSpeed
-                )
+            sail.localRotation = Quaternion.Euler(
+                0f,
+                90f + sailNormalAngle,
+                90f
             );
         }
     }

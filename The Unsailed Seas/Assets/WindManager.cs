@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class WindManager : MonoBehaviour
 {
-    static WindManager instance;
+    public static WindManager instance;
+
+    public float windAngle_degrees = 0;
+    public float windSpeed = 1;
 
     private void Awake()
     {
