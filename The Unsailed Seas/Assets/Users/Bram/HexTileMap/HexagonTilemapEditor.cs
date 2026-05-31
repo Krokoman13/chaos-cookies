@@ -1,10 +1,17 @@
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(HexagonTilemap))]
-public class HexagonTilemapEditor : Editor
+#endif
+public class HexagonTilemapEditor
+#if UNITY_EDITOR
+    : Editor
+#endif
 {
+#if UNITY_EDITOR
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
@@ -14,4 +21,5 @@ public class HexagonTilemapEditor : Editor
             ((HexagonTilemap)target).Generate();
         }
     }
+#endif
 }

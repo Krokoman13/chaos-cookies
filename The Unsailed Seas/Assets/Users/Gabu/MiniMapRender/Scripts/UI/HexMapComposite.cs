@@ -54,18 +54,14 @@ public class HexMapComposite : MonoBehaviour
 
     void OnEnable()
     {
-        //RebuildChunks();
-        //
-        //if (source)
-        //{
-        //    if (source.currentHexMap != null)
-        //        OnMapChanged(source.currentHexMap);
-        //}
+        if (source != null)
+            source.MapChanged += OnMapChanged;
     }
 
     void OnDisable()
     {
-        //DestroyChunks();
+        if (source != null)
+            source.MapChanged -= OnMapChanged;
     }
 
     public void OnMapChanged(bool[,] map)

@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -53,6 +52,8 @@ public class GameManager : MonoBehaviour
         {
             for (int y = 0; y < maxY; y++)
             {
+                if (hexMap[x,y] || HexagonTilemap.ConnectedCount((uint)x, (uint)y, hexMap) > 1) continue;
+
                 Vector2Int point = new Vector2Int(x, y);
                 if (x > maxX_fifth && x < maxX_fifth * 4 && y > maxY_fifth && y < maxY_fifth * 4)
                 { 

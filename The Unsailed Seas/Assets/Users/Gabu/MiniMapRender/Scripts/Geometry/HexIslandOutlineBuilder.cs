@@ -18,11 +18,11 @@ public static class HexIslandOutlineBuilder
         public float turn;
     }
 
-    public static List<Vector2> BuildOutline(
+    public static List<List<Vector2>> BuildOutlines(
         List<Vector2Int> island, Vector2 offset, float hexSize)
     {
         var edges = CollectBorderEdges(island, offset, hexSize);
-        if (edges.Count == 0) return new List<Vector2>();
+        if (edges.Count == 0) return new List<List<Vector2>>();
 
         var loops = TraceLoops(edges);
         if (loops.Count == 0) loops = TraceLoopsUndirected(edges);
@@ -30,17 +30,31 @@ public static class HexIslandOutlineBuilder
         if (loops.Count == 0)
         {
             Debug.LogWarning($"[Outline] Failed to trace any loop for island with {island.Count} cells, {edges.Count} border edges");
-            return new List<Vector2>();
+            return new List<List<Vector2>>();
         }
 
         var biggest = loops[0];
+        List<List<Vector2>> smallerOutlines = new List<List<Vector2>>();
         float biggestArea = Mathf.Abs(SignedArea(biggest));
         for (int i = 1; i < loops.Count; i++)
         {
             float area = Mathf.Abs(SignedArea(loops[i]));
-            if (area > biggestArea) { biggest = loops[i]; biggestArea = area; }
+            if (area <= biggestArea)
+            {
+                smallerOutlines.Add(loops[i]);
+                continue;
+            }
+
+            smallerOutlines.Add(biggest);
+
+            biggest = loops[i]; 
+            biggestArea = area;
         }
-        return biggest;
+
+        List <List<Vector2>> output = new List<List<Vector2>> ();
+        output.Add(biggest);
+        output.AddRange(smallerOutlines);
+        return output;
     }
 
     static List<BorderEdge> CollectBorderEdges(

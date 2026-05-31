@@ -111,48 +111,61 @@ public class HexMapCanvasGraphic : MaskableGraphic
                 continue;
             }
 
-            List<Vector2> outline = HexIslandOutlineBuilder.BuildOutline(
+            List<List<Vector2>> outlines = HexIslandOutlineBuilder.BuildOutlines(
                 island,
                 offset,
                 HexSize
             );
-            UIMeshPainter.DrawWaterLines(vh, outline, WavesColor, WavesCount, WavesSpacing, WavesWidth, WavesWidthNoise, WavesNoiseFrequency);
 
-            if (outline.Count < 3)
-            {
+            if (outlines.Count == 0)
+            { 
                 skippedOutline++;
                 continue;
             }
 
-            outline = PolylineSmoother.SmoothClosedLoop(
-                outline,
-                SmoothingIterations
-            );
+            List<Vector2> biggestOutline = outlines[0];
+            UIMeshPainter.DrawWaterLines(vh, outlines[0], WavesColor, WavesCount, WavesSpacing, WavesWidth, WavesWidthNoise, WavesNoiseFrequency);
 
-            UIMeshPainter.DrawPolygon(vh, outline, LandColor);
-            UIMeshPainter.DrawSketchStroke(
-                vh,
-                outline,
-                CoastColor,
-                MainWidth,
-                MainWidthNoise,
-                MainNoiseFrequency
-            );
-
-            List<Vector2> wobbleA = PolylineSmoother.WobbleClosedLoop(outline, SecondaryWobbleAmount, SecondaryWobbleFrequency);
-
-            Color faded = CoastColor;
-            faded.a = SecondaryAlpha;
-            if (DrawSecondaryStroke)
+            for (int i = 0; i < outlines.Count; i++)
             {
+                List<Vector2> outline = outlines[i];
+
+                if (outline.Count < 3)
+                {
+                    skippedOutline++;
+                    continue;
+                }
+
+                outline = PolylineSmoother.SmoothClosedLoop(
+                    outline,
+                    SmoothingIterations
+                );
+
+                UIMeshPainter.DrawPolygon(vh, outline, i == 0 ? LandColor : SeaColor);
                 UIMeshPainter.DrawSketchStroke(
                     vh,
-                    wobbleA,
-                    faded,
-                    SecondaryWidth,
-                    SecondaryWidthNoise,
-                    SecondaryNoiseFrequency
+                    outline,
+                    CoastColor,
+                    MainWidth,
+                    MainWidthNoise,
+                    MainNoiseFrequency
                 );
+
+                List<Vector2> wobbleA = PolylineSmoother.WobbleClosedLoop(outline, SecondaryWobbleAmount, SecondaryWobbleFrequency);
+
+                Color faded = CoastColor;
+                faded.a = SecondaryAlpha;
+                if (DrawSecondaryStroke)
+                {
+                    UIMeshPainter.DrawSketchStroke(
+                        vh,
+                        wobbleA,
+                        faded,
+                        SecondaryWidth,
+                        SecondaryWidthNoise,
+                        SecondaryNoiseFrequency
+                    );
+                }
             }
         }
 

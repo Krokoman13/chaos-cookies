@@ -1,10 +1,9 @@
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UIElements;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class HexagonTilemap : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class HexagonTilemap : MonoBehaviour
     [SerializeField] int maxY = 108;
 
     public bool[,] currentHexMap = null;
-    [SerializeField] UnityEvent<bool[,]> OnMapChanged;
+    public event Action<bool[,]> MapChanged;
 
     [Serializable] enum Mode { SpawnBeach = 0, RemoveBeach = 1}
     [Serializable] struct TerraformRule
@@ -201,8 +200,7 @@ public class HexagonTilemap : MonoBehaviour
             }
         }
 
-        //Notify other scripts that the map got updated
-        OnMapChanged?.Invoke(currentHexMap);
+        MapChanged?.Invoke(currentHexMap);
     }
 
     private void OnValidate()
@@ -296,6 +294,7 @@ public class HexagonTilemap : MonoBehaviour
     {
         return;
 
+#if UNITY_EDITOR
         for (uint i = 0; i < maxX; i++)
         {
             for (uint j = 0; j < maxY; j++)
@@ -305,5 +304,6 @@ public class HexagonTilemap : MonoBehaviour
                 Handles.Label(position, i + "," + j);
             }
         }
+#endif
     }
 }

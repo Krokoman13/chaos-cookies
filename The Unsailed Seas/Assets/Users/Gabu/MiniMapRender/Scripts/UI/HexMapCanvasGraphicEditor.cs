@@ -1,9 +1,15 @@
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(HexMapCanvasGraphic))]
-public class HexMapCanvasGraphicEditor : Editor
+#endif
+public class HexMapCanvasGraphicEditor
+#if UNITY_EDITOR
+    : Editor
+#endif
 {
+#if UNITY_EDITOR
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
@@ -18,4 +24,5 @@ public class HexMapCanvasGraphicEditor : Editor
             EditorUtility.SetDirty(graphic);
         }
     }
+#endif
 }

@@ -1,9 +1,15 @@
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(HexMapComposite))]
-public class HexMapCompositeEditor : Editor
+#endif
+public class HexMapCompositeEditor
+#if UNITY_EDITOR
+    : Editor
+#endif
 {
+#if UNITY_EDITOR
     public override void OnInspectorGUI()
     {
         EditorGUI.BeginChangeCheck();
@@ -26,4 +32,5 @@ public class HexMapCompositeEditor : Editor
             EditorUtility.SetDirty(composite);
         }
     }
+#endif
 }

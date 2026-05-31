@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 [CreateAssetMenu(menuName = "Water/Water Wave Settings")]
 public class WaterWaveSettings : ScriptableObject

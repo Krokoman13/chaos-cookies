@@ -28,7 +28,7 @@ MonoBehaviour:
   foamDetailScale: 5
   foamSpeed: 0.08
   foamEvolutionSpeed: 1
-  foamOpacity: 0.22
+  foamOpacity: 0.293
   foamAmount: 0.55
   foamLineDensity: 7
   foamLineWidth: 0.16
@@ -36,8 +36,8 @@ MonoBehaviour:
   foamBreakup: 0.45
   foamCrestStrength: 0.08
   foamVoronoiWarp: 0.3
-  foamUnderColor: {r: 0.03, g: 0.32, b: 0.42, a: 1}
-  foamUnderOpacity: 0.18
+  foamUnderColor: {r: 0.0075649684, g: 0.24166636, b: 0.3207547, a: 1}
+  foamUnderOpacity: 0.604
   foamUnderSizeMultiplier: 1
   foamUnderLineWidthMultiplier: 1
   foamUnderSoftnessMultiplier: 1
