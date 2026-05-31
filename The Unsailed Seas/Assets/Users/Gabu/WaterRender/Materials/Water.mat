@@ -45,7 +45,7 @@ Material:
     m_Floats:
     - _AlphaDeep: 1
     - _AlphaShallow: 1
-    - _DepthMaxDistance: 0.01
+    - _DepthMaxDistance: 0.008
     - _FoamAmount: 0.55
     - _FoamBreakup: 0.45
     - _FoamCrestStrength: 0.08
@@ -78,7 +78,7 @@ Material:
     - _Wave2PhaseOffset: 5.75
     - _Wave2SpeedMultiplier: 2.18
     - _Wave2Weight: 0.33
-    - _WaveAmplitude: 0.12
+    - _WaveAmplitude: 0.02
     - _WaveFrequency: 2.19
     - _WaveSpeed: 0.8
     m_Colors:

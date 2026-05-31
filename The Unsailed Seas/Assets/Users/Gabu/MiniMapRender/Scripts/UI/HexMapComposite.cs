@@ -50,30 +50,28 @@ public class HexMapComposite : MonoBehaviour
     public int MinIslandSize = 4;
     public int SmoothingIterations = 1;
 
-    readonly List<HexMapCanvasGraphic> chunks = new();
+    public List<HexMapCanvasGraphic> chunks = new();
 
     void OnEnable()
     {
-        RebuildChunks();
-
-        if (source)
-        {
-            source.OnMapChanged += OnMapChanged;
-            if (source.currentHexMap != null)
-                OnMapChanged(source.currentHexMap);
-        }
+        //RebuildChunks();
+        //
+        //if (source)
+        //{
+        //    if (source.currentHexMap != null)
+        //        OnMapChanged(source.currentHexMap);
+        //}
     }
 
     void OnDisable()
     {
-        if (source)
-            source.OnMapChanged -= OnMapChanged;
-
-        DestroyChunks();
+        //DestroyChunks();
     }
 
-    void OnMapChanged(bool[,] map)
+    public void OnMapChanged(bool[,] map)
     {
+        RebuildChunks();
+
         for (int i = 0; i < chunks.Count; i++)
             chunks[i].SetMap(map);
     }

@@ -15,6 +15,8 @@ public class BoatController : MonoBehaviour
     [SerializeField] private float sailNormalMinAngle = -85f;
     [SerializeField] private float sailNormalMaxAngle = 85f;
 
+    [SerializeField] private ParticleSystem waterParticals;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -29,6 +31,13 @@ public class BoatController : MonoBehaviour
     {
         if (rb == null)
             return;
+
+        float velocity = rb.linearVelocity.magnitude;
+
+        var main = waterParticals.main;
+
+        main.startSpeed = 0.1f + (velocity * 0.25f);
+
 
         // Ship steering
         if (Input.GetKey(KeyCode.A) != Input.GetKey(KeyCode.D))

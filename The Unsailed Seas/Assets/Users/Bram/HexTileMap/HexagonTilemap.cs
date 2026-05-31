@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class HexagonTilemap : MonoBehaviour
@@ -11,7 +12,7 @@ public class HexagonTilemap : MonoBehaviour
     [SerializeField] int maxY = 108;
 
     public bool[,] currentHexMap = null;
-    public event Action<bool[,]> OnMapChanged;
+    [SerializeField] UnityEvent<bool[,]> OnMapChanged;
 
     [Serializable] enum Mode { SpawnBeach = 0, RemoveBeach = 1}
     [Serializable] struct TerraformRule
@@ -209,7 +210,7 @@ public class HexagonTilemap : MonoBehaviour
         }
     }
 
-    List<bool> ConnectedHexTiles(uint x, uint y, bool[,] hexMap)
+    static List<bool> ConnectedHexTiles(uint x, uint y, bool[,] hexMap)
     {
         int maxX = hexMap.GetLength(0);
         int maxY = hexMap.GetLength(1);
@@ -253,7 +254,7 @@ public class HexagonTilemap : MonoBehaviour
         return connected;
     }
 
-    uint ConnectedCount(uint x, uint y, bool[,] hexMap)
+    public static uint ConnectedCount(uint x, uint y, bool[,] hexMap)
     {
         List<bool> connectedHexTiles = ConnectedHexTiles(x, y, hexMap);
 
@@ -267,7 +268,7 @@ public class HexagonTilemap : MonoBehaviour
         return connectedCount;
     }
 
-    Vector2 CalculateHexPosition(uint x, uint y)
+    public static Vector2 CalculateHexPosition(uint x, uint y)
     {
         const float sqrtThree = 0.8660254f;
         Vector2 outPosition = new Vector2(x, y);

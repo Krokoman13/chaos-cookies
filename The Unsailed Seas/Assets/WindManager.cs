@@ -16,4 +16,18 @@ public class WindManager : MonoBehaviour
 
         instance = this;
     }
+
+    public void RandomizeWind()
+    {
+        windAngle_degrees = Random.value * 360.0f;
+    }
+
+    public void FixedUpdate()
+    {
+        windAngle_degrees += (Random.value * 2 - 1.0f);
+
+        windAngle_degrees = Mathf.Abs(windAngle_degrees);
+
+        windAngle_degrees %= 360;
+    }
 }
