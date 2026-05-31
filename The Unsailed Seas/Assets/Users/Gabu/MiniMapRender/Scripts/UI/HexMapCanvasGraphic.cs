@@ -56,8 +56,16 @@ public class HexMapCanvasGraphic : MaskableGraphic
     {
         base.OnEnable();
 
+        Debug.Log($"{name}: HexMapCanvasGraphic OnEnable");
+
         if (!source)
+        {
+            Debug.LogWarning($"{name}: source is NULL");
             return;
+        }
+
+        Debug.Log($"{name}: source assigned = {source.name}");
+        Debug.Log($"{name}: source.currentHexMap is {(source.currentHexMap == null ? "NULL" : "NOT NULL")}");
 
         source.OnMapChanged += SetMap;
 
@@ -75,10 +83,11 @@ public class HexMapCanvasGraphic : MaskableGraphic
 
     public void SetMap(bool[,] newMap)
     {
+        Debug.Log($"{name}: SetMap called. newMap is {(newMap == null ? "NULL" : "NOT NULL")}");
+
         map = newMap;
         SetVerticesDirty();
     }
-
     public void RedrawSameMap()
     {
         if (source != null && source.currentHexMap != null)

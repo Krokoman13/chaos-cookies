@@ -52,18 +52,18 @@ Material:
     - _FoamDetailScale: -4.26
     - _FoamEvolutionSpeed: 0.2
     - _FoamLineDensity: 1.44
-    - _FoamLineWidth: 0.005
-    - _FoamOpacity: 1
+    - _FoamLineWidth: 0
+    - _FoamOpacity: 0.565
     - _FoamScale: 3.5
     - _FoamSharpness: 0.28
     - _FoamSize: 1.85
     - _FoamSoftness: 0.061
-    - _FoamSpeed: 1.09
+    - _FoamSpeed: -0.35
     - _FoamUnderLineWidthMultiplier: 1.29
     - _FoamUnderOffset: 0
-    - _FoamUnderOpacity: 0.877
+    - _FoamUnderOpacity: 0.669
     - _FoamUnderSizeMultiplier: 1
-    - _FoamUnderSoftnessMultiplier: 6.01
+    - _FoamUnderSoftnessMultiplier: 3.49
     - _FoamVoronoiWarp: 0.35
     - _ShoreFoamStrength: 0.8
     - _ShoreNoiseAmount: 1.5
@@ -78,7 +78,7 @@ Material:
     - _Wave2PhaseOffset: 5.75
     - _Wave2SpeedMultiplier: 2.18
     - _Wave2Weight: 0.33
-    - _WaveAmplitude: 0.3
+    - _WaveAmplitude: 0
     - _WaveFrequency: 0.1
     - _WaveSpeed: 0.42
     m_Colors:
