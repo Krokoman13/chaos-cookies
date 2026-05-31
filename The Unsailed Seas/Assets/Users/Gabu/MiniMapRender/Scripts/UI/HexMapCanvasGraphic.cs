@@ -44,6 +44,8 @@ public class HexMapCanvasGraphic : MaskableGraphic
 
     [SerializeField] HexagonTilemap source;
 
+    [HideInInspector] public bool IsManagedByComposite;
+
     bool[,] map;
 
     protected override void Awake()
@@ -55,6 +57,9 @@ public class HexMapCanvasGraphic : MaskableGraphic
     protected override void OnEnable()
     {
         base.OnEnable();
+
+        if (IsManagedByComposite)
+            return;
 
         Debug.Log($"{name}: HexMapCanvasGraphic OnEnable");
 
@@ -75,7 +80,7 @@ public class HexMapCanvasGraphic : MaskableGraphic
 
     protected override void OnDisable()
     {
-        if (source)
+        if (!IsManagedByComposite && source)
             source.OnMapChanged -= SetMap;
 
         base.OnDisable();
@@ -99,17 +104,27 @@ public class HexMapCanvasGraphic : MaskableGraphic
     {
         vh.Clear();
 
-        if (DrawBackgroundInThisChunk)
-            UIMeshPainter.DrawBackground(vh, rectTransform.rect, SeaColor);
-
         if (map == null)
+        {
+            if (DrawBackgroundInThisChunk)
+                UIMeshPainter.DrawBackground(vh, rectTransform.rect, SeaColor);
             return;
+        }
 
         Vector2 mapSize = HexGridLayout.GetMapPixelSize(
             map.GetLength(0),
             map.GetLength(1),
             HexSize
         );
+
+        if (DrawBackgroundInThisChunk)
+        {
+            Rect r = rectTransform.rect;
+            float halfW = Mathf.Max(r.width, mapSize.x) * 0.5f;
+            float halfH = Mathf.Max(r.height, mapSize.y) * 0.5f;
+            Rect bgRect = new Rect(-halfW, -halfH, halfW * 2f, halfH * 2f);
+            UIMeshPainter.DrawBackground(vh, bgRect, SeaColor);
+        }
 
         Vector2 offset = -mapSize * 0.5f;
 
