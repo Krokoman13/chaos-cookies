@@ -15,9 +15,41 @@ public class BoatController : MonoBehaviour
     [SerializeField] private float sailNormalMinAngle = -85f;
     [SerializeField] private float sailNormalMaxAngle = 85f;
 
+    [SerializeField] float forwardVelocity = 0.1f;
+    [SerializeField] float turnSpeed = 120f;
+
+    [Header("Water")]
+    [SerializeField] WaterWaveSettings waveSettings;
+    [SerializeField] float heightOffset = 0.35f;
+
+
+
+
+    [Header("Boat Model")]
+    [SerializeField] Transform BoatModel;
+    [SerializeField] float modelHeightSmoothTime = 0.08f;
+    [SerializeField] float modelTiltStrength = 0.4f;
+    [SerializeField] float visualHeightStrength = 0.35f;
+    [SerializeField] float maxVisualHeightOffset = 0.18f;
+
+    const float normalSampleDistance = 0.8f;
+
+    Vector3 boatModelBaseLocalPosition;
+    Quaternion boatModelBaseLocalRotation;
+
+    float modelYVelocity;
+    float baseWaterY;
+    bool hasBaseWaterY;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+
+        if (BoatModel != null)
+        {
+            boatModelBaseLocalPosition = BoatModel.localPosition;
+            boatModelBaseLocalRotation = BoatModel.localRotation;
+        }
     }
 
     Vector2 Project(Vector2 a, Vector2 b)
@@ -120,5 +152,28 @@ public class BoatController : MonoBehaviour
                 90f
             );
         }
+        else
+        {
+            forwardVector = BoatModel.forward;
+        }
+
+        Vector3 forwardOnWater = Vector3.ProjectOnPlane(
+            forwardVector,
+            upVector
+        );
+
+        if (forwardOnWater.sqrMagnitude < 0.001f)
+            return;
+
+        Quaternion targetRotation = Quaternion.LookRotation(
+            forwardOnWater.normalized,
+            upVector
+        );
+
+        BoatModel.rotation = Quaternion.RotateTowards(
+            BoatModel.rotation,
+            targetRotation,
+            turnSpeed * Time.deltaTime
+        );
     }
 }
