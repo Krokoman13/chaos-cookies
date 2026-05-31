@@ -118,6 +118,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 28b83bda82b7b3249b2b5cb14f666fed, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8dc1fd20e2e03c84a8e7d8beb31c7ee6, type: 2}
     - target: {fileID: 919132149155446097, guid: 28b83bda82b7b3249b2b5cb14f666fed, type: 3}
       propertyPath: m_Name
       value: Terrain3.1
